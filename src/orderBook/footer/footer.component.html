@@ -1,0 +1,17 @@
+<div class="text-center p-8">
+  <p>{{TRANSLATION.availablePairs}}:</p>
+  <ul class="mb-4">
+    @for (p of PRODUCTS; track $index) {
+      <li
+        [className]="p.id === product().id ? 'font-bold' : ''"
+      >
+        {{p.code}}
+      </li>
+    }
+  </ul>
+  <button
+      (click)="toggleFeed()"
+      class="bg-purple-700 py-4 px-8 rounded font-bold hover:bg-purple-800 active:bg-purple-900">
+      {{TRANSLATION.toggleFeed}}
+  </button>
+</div>

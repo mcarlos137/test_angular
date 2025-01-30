@@ -1,0 +1,108 @@
+<div>
+  <header class="flex p-4 space-between">
+      @if(TRANSLATION.title){
+        <h1>{{TRANSLATION.title}}</h1>
+      }
+      <div class="mx-auto -translate-x-1/4">
+        <div class="text-center text-gray-500">
+          @if(TRANSLATION.spread){
+            <span>{{TRANSLATION.spread}}</span> {{round(spread())}} ({{round(spreadPercentage())}}%)
+          }
+          <!-- {!!title && <span>{title}:</span>} {round(spread)} (
+          {round(spreadPercentage)}%) -->
+        </div>
+      </div>
+  </header>
+  <div class="flex w-full px-8" data-testid="order-book">
+    @if(bids().length){
+      <div data-testid="order-book-bids" class="flex-1">
+        <table class="w-full table-fixed">
+          <thead>
+            <tr class="text-gray-500">
+              <th class="text-right p-1 pr-8 font-semibold">
+                {{TRANSLATION.total}}
+              </th>
+              <th className="text-right p-1 pr-8 font-semibold">
+                {{TRANSLATION.size}}
+              </th>
+              <th className="text-right p-1 pr-8 font-semibold">
+                {{TRANSLATION.price}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (bid of bids(); track $index) {
+              @if (bid[0] && bid[1] && bid[2]) {
+                <tr 
+                  [style.background] = "'linear-gradient(to right, transparent ' + calculateStop(bid[2], highestTotal()) + '%, rgb(20 83 45) ' + calculateStop(bid[2], highestTotal()) + '%)'"
+                >
+                  <td
+                    data-testid="grid-cell"
+                    class="text-right p-1 pr-8 font-semibold">
+                    {{bid[2]}}
+                  </td>
+                  <td
+                    data-testid="grid-cell"
+                    className="text-right p-1 pr-8 font-semibold">
+                    {{bid[1]}}
+                  </td>
+                  <td
+                    data-testid="grid-cell"
+                    className="text-right p-1 pr-8 font-semibold text-green-500">
+                    {{bid[0]}}
+                  </td>
+                </tr>
+              }
+            }
+            
+          </tbody>
+        </table>
+      </div>
+    }
+    @if(asks().length){
+      <div data-testid="order-book-asks" class="flex-1">
+        <table class="w-full">
+          <thead>
+            <tr class="text-gray-500">
+              <th class="text-right p-1 pr-8 font-semibold">
+                {{TRANSLATION.price}}
+              </th>
+              <th className="text-right p-1 pr-8 font-semibold">
+                {{TRANSLATION.size}}
+              </th>
+              <th className="text-right p-1 pr-8 font-semibold">
+                {{TRANSLATION.total}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (ask of asks(); track $index) {
+              @if (ask[0] && ask[1] && ask[2]) {
+                <tr 
+                [style.background] = "'linear-gradient(to left, transparent ' + calculateStop(ask[2], highestTotal()) + '%, rgb(127 29 29) ' + calculateStop(ask[2], highestTotal()) + '%)'"
+                >
+                  <td
+                    data-testid="grid-cell"
+                    class="text-right p-1 pr-8 font-semibold">
+                    {{ask[0]}}
+                  </td>
+                  <td
+                    data-testid="grid-cell"
+                    className="text-right p-1 pr-8 font-semibold">
+                    {{ask[1]}}
+                  </td>
+                  <td
+                    data-testid="grid-cell"
+                    className="text-right p-1 pr-8 font-semibold text-green-500">
+                    {{ask[1]}}
+                  </td>
+                </tr>
+              }
+            }
+            
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div>
+  @if(paused()){
+    <div class="absolute bg-black/80 top-0 right-0 bottom-0 left-0 z-10 flex items-center justify-center">
+      <div class="text-center bg-black p-8 rounded-lg">
+        <p class="mb-8">{{TRANSLATION.paused}}</p>
+        <button
+          (click)="unpause()"
+          class="bg-purple-700 py-4 px-8 rounded font-bold hover:bg-purple-800 active:bg-purple-900">
+          {{TRANSLATION.reconnect}}
+        </button>
+      </div>
+    </div>
+  }
+</div>

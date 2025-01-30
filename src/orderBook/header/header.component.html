@@ -1,0 +1,34 @@
+<header class="p-4 pt-8">
+    <p class="mb-4 text-center">
+        <!-- {translation.pair}:{' '} -->
+          <span class="font-semibold">
+            @if (PRODUCTS.length) {
+              {{product().code}}
+            }
+              <!-- {PRODUCTS.length &&
+          PRODUCTS.find((p) => p?.id === product.id)?.code} -->
+          </span>
+    </p>
+    <table class="table-fixed min-w-full text-center">
+        <thead>
+          <tr>
+            <th>Bid</th>
+            <th>Ask</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="font-bold text-lg">
+            <td class="w-1/2 text-green-500">
+              @if(orderBook().bids.length){
+                {{orderBook().bids[0][0]}}
+              }
+            </td>
+            <td class="w-1/2 text-red-500">
+              @if(orderBook().asks.length){
+                {{orderBook().asks[0][0]}}
+              }
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</header>
